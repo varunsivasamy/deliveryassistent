@@ -3,6 +3,7 @@ from livekit import agents
 from livekit.agents import AgentSession, Agent, RoomInputOptions
 from livekit.plugins import google, noise_cancellation
 import sounddevice as sd
+import os
 
 # Load environment variables
 load_dotenv(".env")
@@ -20,7 +21,7 @@ async def entrypoint(ctx: agents.JobContext):
     session = AgentSession(
         llm=google.beta.realtime.RealtimeModel(
             model="gemini-2.0-flash-exp",
-            api_key="AIzaSyDSDwWcgA3KiUYw4hlTQHqIptG8VpfVTqY",
+            api_key=os.getenv("GOOGLE_API_KEY"),
             voice="Puck",
             temperature=0.8,
             instructions=AGENT_INSTRUCTIONS,
